@@ -7,8 +7,6 @@ import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Named;
 import jakarta.persistence.*;
 import jakarta.transaction.Transactional;
-
-import com.github.javafaker.Faker;
 import com.sample.model.Item;
 
 @Named
@@ -34,12 +32,11 @@ public class ItemService {
 	}
 
 	public Item generateRandomItem() {
-		Faker faker = new Faker();
 
 		Item item = new Item();
-		item.setCategory(faker.commerce().department());
-		item.setName(faker.commerce().productName());
-		item.setPrice((Double.valueOf(faker.commerce().price(10, 1000))));
+		item.setCategory("department");
+		item.setName("productName");
+		item.setPrice((Double.valueOf(56.88)));
 		return item;
 	}
 
