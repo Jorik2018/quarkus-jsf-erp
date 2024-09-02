@@ -1,0 +1,112 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:o="http://omnifaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+
+    <ui:define name="content">
+
+
+        <div class="Container100 ui-fluid">
+            <div class="ContainerIndent">
+                <p:panel>
+
+                    <p:toolbar style="margin-top:20px">
+                        <f:facet name="left">
+                            <p:commandButton value="Grabar Cliente"
+                                             action="#{registroClienteController.registrarCliente}"/>
+                        </f:facet>
+                        <f:facet name="right">
+                            <p:button value="Buscar Cliente" outcome="/cliente/buscarCliente"/>
+                        </f:facet>
+                    </p:toolbar>
+
+                </p:panel>
+            </div>
+        </div>
+
+        <f:metadata>
+            <o:viewParam name="cliente" value="#{registroClienteController.cliente}"/>
+            <f:event listener="#{registroClienteController.inicializar}"
+                     type="preRenderView"/>
+        </f:metadata>
+
+        <div class="Container100 ui-fluid">
+            <div class="ContainerIndent">
+
+                <p:panel>
+                    <div class="FontBold Fs18 hardblue"
+                         style="margin: 15px 10px">#{registroClienteController.editando ? 'Editando Cliente' :
+                            'Registrar Nuevo Cliente'}</div>
+                    <div class="Separator"></div>
+
+
+                    <h:form>
+
+                        <p:messages autoUpdate="true"/>
+
+                        <div class="Separator"></div>
+
+                        <p:panelGrid columns="4" columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4" layout="grid" styleClass="ui-panelgrid-blank" style="border:0px none; background-color:transparent;">
+                            <p:outputLabel value="Nombre" for="nombre" />
+                            <p:inputText id="nombre"  maxlength="255"
+                                         value="#{registroClienteController.cliente.nombreCliente}" />
+
+                            <p:outputLabel value="Tipo Cliente" for="tipoPersona" />
+                            <p:selectOneRadio id="tipoPersona" layout="responsive" columns="2"
+                                              value="#{registroClienteController.cliente.tipoPersona}">
+                                <f:selectItems value="#{registroClienteController.tiposPersona}" var="tipoPersona"
+                                               itemValue="#{tipoPersona}"
+                                               itemLabel="#{tipoPersona.descripcion}"/>
+                            </p:selectOneRadio>
+
+
+                            <p:outputLabel value="Tipo Documento" for="tipoDocumento" />
+                            <p:selectOneMenu id="tipoDocumento"
+                                                value="#{registroClienteController.cliente.tipoDocumento}">
+                                <f:selectItems value="#{registroClienteController.tiposDocumento}" var="tipoDocumento"
+                                               itemValue="#{tipoDocumento}"
+                                               itemLabel="#{tipoDocumento.descripcion}"/>
+
+                            </p:selectOneMenu>
+
+                            <p:outputLabel value="Número Documento" for="numdoc" />
+                            <p:inputMask mask="99999999" id="numdoc" maxlength="8"
+                                         value="#{registroClienteController.cliente.numeroDocumento}" />
+
+
+                            <p:outputLabel value="E-mail" for="email" />
+                            <p:inputText id="email"  maxlength="100"
+                                         value="#{registroClienteController.cliente.email}" />
+
+                            <p:outputLabel value="Sexo" for="sexo" />
+                            <p:selectOneRadio id="sexo" layout="responsive"  columns="2"
+                                              value="#{registroClienteController.cliente.sexo}">
+                                <f:selectItems value="#{registroClienteController.sexo}" var="sexo"
+                                               itemValue="#{sexo}"
+                                               itemLabel="#{sexo.descripcion}"/>
+
+                            </p:selectOneRadio>
+
+
+                            <p:outputLabel value="Teléfono" for="telefono" />
+                            <p:inputText id="telefono"  maxlength="100"
+                                         value="#{registroClienteController.cliente.numeroTelefono}" />
+
+                        </p:panelGrid>
+
+
+                    </h:form>
+
+                </p:panel>
+            </div>
+        </div>
+
+
+    </ui:define>
+
+
+</ui:composition>
